@@ -76,7 +76,7 @@ void InitialBoundaryValueProblem (
         }
     }
     for(int i=1;i<tCount;i++){
-        //Заполняем массив правых частей
+        //Заполняем массив правых частей
         for ( int j = 0; j < lCount; j++ ) {
             if ( j == 0 ) {
                 b[j] = q * ( tau * f[i - 1][j] + x[i - 1][j] );
@@ -174,7 +174,7 @@ void AdditionalInitialBoundaryValueProblem ( std::vector<std::vector< double >> 
     }
     //Итерации по времени
     for(int i=tCount-2;i>=0;i--){
-        //Заполняем массив правых частей
+        //Заполняем массив правых частей
         for ( int j = 0; j < lCount; j++ ) {
             if ( j == 0 ) {
                 b[j] = q * ( ph[i + 1][j] );
@@ -263,12 +263,12 @@ double ConditionalGradientMethodStep (
             buf = buf - f[i][j];
             result += Sqr( buf );
         }
-        //Край j = 0
+        //Край j = 0
         buf = f[i][0];
         f[i][0] = ( 1.0 - alpha ) * f[i][0] + alpha * f_[i][0];
         buf = buf - f[i][0];
         result += 0.5 * Sqr( buf );
-        //Край j = M - 1
+        //Край j = M - 1
         buf = f[i][M - 1];
         f[i][M - 1] = ( 1.0 - alpha ) * f[i][M - 1] + alpha * f_[i][M - 1];
         buf= buf-f[i][M-1];
@@ -283,12 +283,12 @@ double ConditionalGradientMethodStep (
         buf = buf - f[0][j];
         result += 0.5 * Sqr( buf );
     }
-    //Крайj=0
+    //Крайj=0
     buf = f[0][0];
     f[0][0] = ( 1.0 - alpha ) * f[0][0] + alpha * f_[0][0];
     buf = buf - f[0][0];
     result += 0.25 * Sqr( buf );
-    //Крайj=M-1
+    //Крайj=M-1
     buf = f[0][M - 1];
     f[0][M-1]=(1.0-alpha)*f[0][M-1]+alpha*f_[0][M-1];
     buf=buf-f[0][M-1];
@@ -301,12 +301,12 @@ double ConditionalGradientMethodStep (
         buf= buf-f[N-1][j];
         result += Sqr( buf );
     }
-    //Крайj=0
+    //Крайj=0
     buf = f[N - 1][0];
     f[N-1][0]=(1.0-alpha)*f[N-1][0]+alpha*f_[N-1][0];
     buf=buf-f[N-1][0];
     result += 0.5 * Sqr( buf );
-    //Крайj=M-1
+    //Крайj=M-1
     buf=f[N-1][M-1];
     f[N-1][M-1]=(1.0-alpha)*f[N-1][M-1]+alpha*f_[N-1][M-1];
     buf= buf-f[N-1][M-1];
@@ -378,7 +378,7 @@ result_t ConditionalGradientMethod1 ( const int lCount,
         alpha = CalculateAlpha1( tau, ps, f, f_, x, x_ );
         //Вычисляем следующее значение управления и определяем норму разности с предыдущим значением
         d = ConditionalGradientMethodStep( f, f_, alpha, R, h, tau );
-        //Вычисляем следующее приближение к решению краевой задачи
+        //Вычисляем следующее приближение к решению краевой задачи
         InitialBoundaryValueProblem( x, f, p, a, l, v, T, lCount, tCount );
         //Сохраняем результат
         if ( save ) {
@@ -486,12 +486,12 @@ int main(int argc, const char * argv[]) {
     result_t res = ConditionalGradientMethod1( lCount, tCount, true, a, l , v, T, R, eps, p, y, x1, f1 );
     std::cout << "Точность: " << std::fixed << std::setprecision( precision ) << eps << std::endl;
     std::cout << "Метод 1" << std::endl;
-    std::cout << " " << "Количество итераций: " << res.countOfIterations << std::endl;
+    std::cout << " " << "Количество итераций: " << res.countOfIterations << std::endl;
     std::cout << " " << "Погрешность решения: " << std::fixed << std::setprecision( precision ) << res.error << std::endl;
 
     /*res = ConditionalGradientMethod2( lCount, tCount, true, a, l, v, T, R, eps, p, y, x2, f2 );
      std::cout << "Метод 2" << std::endl;
-     std::cout << " " << "Количество итераций: " << res.countOfIterations << std::endl;
+     std::cout << " " << "Количество итераций: " << res.countOfIterations << std::endl;
      std::cout << " " << "Погрешность решения: " << std::fixed << std::setprecision( precision ) << res.error << std::endl;*/
     
     for(auto i=0;i<lCount;i++){
@@ -516,28 +516,3 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
